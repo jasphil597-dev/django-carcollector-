@@ -10,11 +10,22 @@ WASH_TYPES = (
 )
 # new code above
 
+# Add the Toy model
+class Accessory(models.Model):
+    name = models.CharField(max_length=50)
+    color = models.CharField(max_length=20)
+    
+    def __str__(self):
+        return self.name
+
 class Car(models.Model):
     make = models.CharField(max_length=50)
     model = models.CharField(max_length=100)
     year = models.PositiveIntegerField()
-
+    # Add the M:M relationship
+    accessories = models.ManyToManyField(Accessory, related_name="cars")
+    
+    # new code below
     def __str__(self):
         return f"{self.year} {self.make} {self.model}"
     
@@ -36,10 +47,3 @@ class Wash(models.Model):
     # Change the default sort order
     class Meta:
         ordering = ['-date']
-
-class Accessories(models.Model):
-    name = models.CharField(max_length=50)
-    color = models.CharField(max_length=20)
-    
-    def __str__(self):
-        return self.name
