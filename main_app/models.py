@@ -1,6 +1,8 @@
 from django.db import models
 # add this import
 from datetime import date
+# Import the User
+from django.contrib.auth.models import User
 
 # A tuple of 2-tuples
 WASH_TYPES = (
@@ -24,6 +26,8 @@ class Car(models.Model):
     year = models.PositiveIntegerField()
     # Add the M:M relationship
     accessories = models.ManyToManyField(Accessory, related_name="cars")
+     # Add the foreign key linking to a user instance
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     # new code below
     def __str__(self):
