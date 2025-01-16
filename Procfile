@@ -10,4 +10,4 @@ release: python3 manage.py migrate
 
 # It will act as a middleman between our application and the internet.
 
-web: gunicorn catcollector.wsgi
+web: gunicorn carcollector.wsgi
